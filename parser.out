@@ -18,30 +18,31 @@ Rule 12    condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_
 Rule 13    funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 Rule 14    inicializacion -> IDENTIFICADOR INT ASIGNACION NUMERO
 Rule 15    condicion -> IDENTIFICADOR OP_RELACIONAL NUMERO
-Rule 16    incremento -> IDENTIFICADOR INCREMENTO
-Rule 17    bloque_codigo -> CONTENIDO
-Rule 18    bloque_codigo -> vacio
-Rule 19    parametros -> IDENTIFICADOR
-Rule 20    parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA
-Rule 21    parametros -> vacio
-Rule 22    vacio -> <empty>
+Rule 16    condicion -> IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR
+Rule 17    incremento -> IDENTIFICADOR INCREMENTO
+Rule 18    bloque_codigo -> CONTENIDO
+Rule 19    bloque_codigo -> vacio
+Rule 20    parametros -> IDENTIFICADOR
+Rule 21    parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA
+Rule 22    parametros -> vacio
+Rule 23    vacio -> <empty>
 
 Terminals, with rules where they appear
 
 ASIGNACION           : 5 14
-COMILLA              : 9 9 20 20
-CONTENIDO            : 17
+COMILLA              : 9 9 21 21
+CONTENIDO            : 18
 ELSE                 : 12
 FOR                  : 10
 FUN                  : 13
-IDENTIFICADOR        : 5 9 13 14 15 16 19 20 20
+IDENTIFICADOR        : 5 9 13 14 15 16 16 17 20 21 21
 IF                   : 11 12
-INCREMENTO           : 16
+INCREMENTO           : 17
 INT                  : 6 14
 LLAVE_ABRE           : 10 11 12 12 13
 LLAVE_CIERRA         : 10 11 12 12 13
 NUMERO               : 8 14 15
-OP_RELACIONAL        : 15
+OP_RELACIONAL        : 15 16
 PAR_ABRE             : 10 11 12 13
 PAR_CIERRA           : 10 11 12 13
 SEMICOLON            : 10 10
@@ -62,7 +63,7 @@ incremento           : 10
 inicializacion       : 10
 parametros           : 13
 tipo                 : 5
-vacio                : 18 21
+vacio                : 19 22
 
 Parsing method: LALR
 
@@ -192,6 +193,7 @@ state 14
     (11) condicional_if -> IF PAR_ABRE . condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
     (12) condicional_if -> IF PAR_ABRE . condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA
     (15) condicion -> . IDENTIFICADOR OP_RELACIONAL NUMERO
+    (16) condicion -> . IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 20
 
@@ -240,6 +242,7 @@ state 19
 state 20
 
     (15) condicion -> IDENTIFICADOR . OP_RELACIONAL NUMERO
+    (16) condicion -> IDENTIFICADOR . OP_RELACIONAL IDENTIFICADOR
 
     OP_RELACIONAL   shift and go to state 28
 
@@ -247,13 +250,13 @@ state 20
 state 21
 
     (13) funcion -> FUN IDENTIFICADOR PAR_ABRE . parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
-    (19) parametros -> . IDENTIFICADOR
-    (20) parametros -> . IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA
-    (21) parametros -> . vacio
-    (22) vacio -> .
+    (20) parametros -> . IDENTIFICADOR
+    (21) parametros -> . IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA
+    (22) parametros -> . vacio
+    (23) vacio -> .
 
     IDENTIFICADOR   shift and go to state 29
-    PAR_CIERRA      reduce using rule 22 (vacio -> .)
+    PAR_CIERRA      reduce using rule 23 (vacio -> .)
 
     parametros                     shift and go to state 30
     vacio                          shift and go to state 31
@@ -283,6 +286,7 @@ state 25
 
     (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON . condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
     (15) condicion -> . IDENTIFICADOR OP_RELACIONAL NUMERO
+    (16) condicion -> . IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 20
 
@@ -306,69 +310,79 @@ state 27
 state 28
 
     (15) condicion -> IDENTIFICADOR OP_RELACIONAL . NUMERO
+    (16) condicion -> IDENTIFICADOR OP_RELACIONAL . IDENTIFICADOR
 
-    NUMERO          shift and go to state 36
+    NUMERO          shift and go to state 37
+    IDENTIFICADOR   shift and go to state 36
 
 
 state 29
 
-    (19) parametros -> IDENTIFICADOR .
-    (20) parametros -> IDENTIFICADOR . COMILLA IDENTIFICADOR COMILLA
+    (20) parametros -> IDENTIFICADOR .
+    (21) parametros -> IDENTIFICADOR . COMILLA IDENTIFICADOR COMILLA
 
-    PAR_CIERRA      reduce using rule 19 (parametros -> IDENTIFICADOR .)
-    COMILLA         shift and go to state 37
+    PAR_CIERRA      reduce using rule 20 (parametros -> IDENTIFICADOR .)
+    COMILLA         shift and go to state 38
 
 
 state 30
 
     (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros . PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
-    PAR_CIERRA      shift and go to state 38
+    PAR_CIERRA      shift and go to state 39
 
 
 state 31
 
-    (21) parametros -> vacio .
+    (22) parametros -> vacio .
 
-    PAR_CIERRA      reduce using rule 21 (parametros -> vacio .)
+    PAR_CIERRA      reduce using rule 22 (parametros -> vacio .)
 
 
 state 32
 
     (9) expresion -> COMILLA IDENTIFICADOR . COMILLA
 
-    COMILLA         shift and go to state 39
+    COMILLA         shift and go to state 40
 
 
 state 33
 
     (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion . SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
-    SEMICOLON       shift and go to state 40
+    SEMICOLON       shift and go to state 41
 
 
 state 34
 
     (14) inicializacion -> IDENTIFICADOR INT ASIGNACION . NUMERO
 
-    NUMERO          shift and go to state 41
+    NUMERO          shift and go to state 42
 
 
 state 35
 
     (11) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
     (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA
-    (17) bloque_codigo -> . CONTENIDO
-    (18) bloque_codigo -> . vacio
-    (22) vacio -> .
+    (18) bloque_codigo -> . CONTENIDO
+    (19) bloque_codigo -> . vacio
+    (23) vacio -> .
 
-    CONTENIDO       shift and go to state 43
-    LLAVE_CIERRA    reduce using rule 22 (vacio -> .)
+    CONTENIDO       shift and go to state 44
+    LLAVE_CIERRA    reduce using rule 23 (vacio -> .)
 
-    bloque_codigo                  shift and go to state 42
-    vacio                          shift and go to state 44
+    bloque_codigo                  shift and go to state 43
+    vacio                          shift and go to state 45
 
 state 36
+
+    (16) condicion -> IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR .
+
+    PAR_CIERRA      reduce using rule 16 (condicion -> IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR .)
+    SEMICOLON       reduce using rule 16 (condicion -> IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR .)
+
+
+state 37
 
     (15) condicion -> IDENTIFICADOR OP_RELACIONAL NUMERO .
 
@@ -376,198 +390,198 @@ state 36
     SEMICOLON       reduce using rule 15 (condicion -> IDENTIFICADOR OP_RELACIONAL NUMERO .)
 
 
-state 37
-
-    (20) parametros -> IDENTIFICADOR COMILLA . IDENTIFICADOR COMILLA
-
-    IDENTIFICADOR   shift and go to state 45
-
-
 state 38
 
-    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+    (21) parametros -> IDENTIFICADOR COMILLA . IDENTIFICADOR COMILLA
 
-    LLAVE_ABRE      shift and go to state 46
+    IDENTIFICADOR   shift and go to state 46
 
 
 state 39
+
+    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+
+    LLAVE_ABRE      shift and go to state 47
+
+
+state 40
 
     (9) expresion -> COMILLA IDENTIFICADOR COMILLA .
 
     $end            reduce using rule 9 (expresion -> COMILLA IDENTIFICADOR COMILLA .)
 
 
-state 40
+state 41
 
     (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON . incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
-    (16) incremento -> . IDENTIFICADOR INCREMENTO
+    (17) incremento -> . IDENTIFICADOR INCREMENTO
 
-    IDENTIFICADOR   shift and go to state 48
+    IDENTIFICADOR   shift and go to state 49
 
-    incremento                     shift and go to state 47
+    incremento                     shift and go to state 48
 
-state 41
+state 42
 
     (14) inicializacion -> IDENTIFICADOR INT ASIGNACION NUMERO .
 
     SEMICOLON       reduce using rule 14 (inicializacion -> IDENTIFICADOR INT ASIGNACION NUMERO .)
 
 
-state 42
+state 43
 
     (11) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
     (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
-    LLAVE_CIERRA    shift and go to state 49
-
-
-state 43
-
-    (17) bloque_codigo -> CONTENIDO .
-
-    LLAVE_CIERRA    reduce using rule 17 (bloque_codigo -> CONTENIDO .)
+    LLAVE_CIERRA    shift and go to state 50
 
 
 state 44
 
-    (18) bloque_codigo -> vacio .
+    (18) bloque_codigo -> CONTENIDO .
 
-    LLAVE_CIERRA    reduce using rule 18 (bloque_codigo -> vacio .)
+    LLAVE_CIERRA    reduce using rule 18 (bloque_codigo -> CONTENIDO .)
 
 
 state 45
 
-    (20) parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR . COMILLA
+    (19) bloque_codigo -> vacio .
 
-    COMILLA         shift and go to state 50
+    LLAVE_CIERRA    reduce using rule 19 (bloque_codigo -> vacio .)
 
 
 state 46
 
-    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
-    (17) bloque_codigo -> . CONTENIDO
-    (18) bloque_codigo -> . vacio
-    (22) vacio -> .
+    (21) parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR . COMILLA
 
-    CONTENIDO       shift and go to state 43
-    LLAVE_CIERRA    reduce using rule 22 (vacio -> .)
+    COMILLA         shift and go to state 51
 
-    bloque_codigo                  shift and go to state 51
-    vacio                          shift and go to state 44
 
 state 47
 
-    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento . PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
+    (18) bloque_codigo -> . CONTENIDO
+    (19) bloque_codigo -> . vacio
+    (23) vacio -> .
 
-    PAR_CIERRA      shift and go to state 52
+    CONTENIDO       shift and go to state 44
+    LLAVE_CIERRA    reduce using rule 23 (vacio -> .)
 
+    bloque_codigo                  shift and go to state 52
+    vacio                          shift and go to state 45
 
 state 48
 
-    (16) incremento -> IDENTIFICADOR . INCREMENTO
+    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento . PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
-    INCREMENTO      shift and go to state 53
+    PAR_CIERRA      shift and go to state 53
 
 
 state 49
+
+    (17) incremento -> IDENTIFICADOR . INCREMENTO
+
+    INCREMENTO      shift and go to state 54
+
+
+state 50
 
     (11) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .
     (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA . ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
     $end            reduce using rule 11 (condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .)
-    ELSE            shift and go to state 54
-
-
-state 50
-
-    (20) parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA .
-
-    PAR_CIERRA      reduce using rule 20 (parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA .)
+    ELSE            shift and go to state 55
 
 
 state 51
 
-    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
+    (21) parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA .
 
-    LLAVE_CIERRA    shift and go to state 55
+    PAR_CIERRA      reduce using rule 21 (parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA .)
 
 
 state 52
 
-    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+    (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
 
-    LLAVE_ABRE      shift and go to state 56
+    LLAVE_CIERRA    shift and go to state 56
 
 
 state 53
 
-    (16) incremento -> IDENTIFICADOR INCREMENTO .
-
-    PAR_CIERRA      reduce using rule 16 (incremento -> IDENTIFICADOR INCREMENTO .)
-
-
-state 54
-
-    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
 
     LLAVE_ABRE      shift and go to state 57
 
 
+state 54
+
+    (17) incremento -> IDENTIFICADOR INCREMENTO .
+
+    PAR_CIERRA      reduce using rule 17 (incremento -> IDENTIFICADOR INCREMENTO .)
+
+
 state 55
+
+    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE . LLAVE_ABRE bloque_codigo LLAVE_CIERRA
+
+    LLAVE_ABRE      shift and go to state 58
+
+
+state 56
 
     (13) funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .
 
     $end            reduce using rule 13 (funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .)
 
 
-state 56
-
-    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
-    (17) bloque_codigo -> . CONTENIDO
-    (18) bloque_codigo -> . vacio
-    (22) vacio -> .
-
-    CONTENIDO       shift and go to state 43
-    LLAVE_CIERRA    reduce using rule 22 (vacio -> .)
-
-    bloque_codigo                  shift and go to state 58
-    vacio                          shift and go to state 44
-
 state 57
 
-    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
-    (17) bloque_codigo -> . CONTENIDO
-    (18) bloque_codigo -> . vacio
-    (22) vacio -> .
+    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
+    (18) bloque_codigo -> . CONTENIDO
+    (19) bloque_codigo -> . vacio
+    (23) vacio -> .
 
-    CONTENIDO       shift and go to state 43
-    LLAVE_CIERRA    reduce using rule 22 (vacio -> .)
+    CONTENIDO       shift and go to state 44
+    LLAVE_CIERRA    reduce using rule 23 (vacio -> .)
 
     bloque_codigo                  shift and go to state 59
-    vacio                          shift and go to state 44
+    vacio                          shift and go to state 45
 
 state 58
 
-    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
+    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE . bloque_codigo LLAVE_CIERRA
+    (18) bloque_codigo -> . CONTENIDO
+    (19) bloque_codigo -> . vacio
+    (23) vacio -> .
 
-    LLAVE_CIERRA    shift and go to state 60
+    CONTENIDO       shift and go to state 44
+    LLAVE_CIERRA    reduce using rule 23 (vacio -> .)
 
+    bloque_codigo                  shift and go to state 60
+    vacio                          shift and go to state 45
 
 state 59
 
-    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
+    (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
 
     LLAVE_CIERRA    shift and go to state 61
 
 
 state 60
 
+    (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo . LLAVE_CIERRA
+
+    LLAVE_CIERRA    shift and go to state 62
+
+
+state 61
+
     (10) ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .
 
     $end            reduce using rule 10 (ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA .)
 
 
-state 61
+state 62
 
     (12) condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA .
 

@@ -99,7 +99,8 @@ def p_inicializacion(p):
     '''inicializacion : IDENTIFICADOR INT ASIGNACION NUMERO'''
 
 def p_condicion(p):
-    '''condicion : IDENTIFICADOR OP_RELACIONAL NUMERO'''
+    '''condicion : IDENTIFICADOR OP_RELACIONAL NUMERO
+                 | IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR'''
 
 def p_incremento(p):
     '''incremento : IDENTIFICADOR INCREMENTO'''
