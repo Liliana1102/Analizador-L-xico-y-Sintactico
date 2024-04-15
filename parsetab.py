@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASIGNACION COMILLA CONTENIDO ELSE FOR FUN IDENTIFICADOR IF INCREMENTO INT LLAVE_ABRE LLAVE_CIERRA NUMERO OP_RELACIONAL PAR_ABRE PAR_CIERRA SEMICOLON STRAR : XC\n          | ciclo_for\n          | condicional_if\n          | funcionXC : IDENTIFICADOR tipo ASIGNACION expresiontipo : INT\n            | STRexpresion : NUMERO\n                 | COMILLA IDENTIFICADOR COMILLAciclo_for : FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRAcondicional_if : IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA\n                      | IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRAfuncion : FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRAinicializacion : IDENTIFICADOR INT ASIGNACION NUMEROcondicion : IDENTIFICADOR OP_RELACIONAL NUMERO\n                 | IDENTIFICADOR OP_RELACIONAL IDENTIFICADORincremento : IDENTIFICADOR INCREMENTObloque_codigo : CONTENIDO\n                     | vacioparametros : IDENTIFICADOR\n                  | IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA\n                  | vaciovacio :'
+_lr_signature = 'ASIGNACION COMILLA CONTENIDO ELSE FOR FUN IDENTIFICADOR IF IMPRIMIR INCREMENTO INT LLAVE_ABRE LLAVE_CIERRA NUMERO OP_RELACIONAL PAR_ABRE PAR_CIERRA PUNTOCOMA STRAR :  varint\n          |  varstr\n          |  funcion\n          |  funcionVarStr\n          |  funcionVarInt\n          |  ciclo_for\n          |  ciclo_forImprimir\n          |  ifelseImprimir\n          |  ifelseImprimirInt\n          |  ifvarint : IDENTIFICADOR INT ASIGNACION NUMEROvarintAux : IDENTIFICADOR INT ASIGNACION NUMEROvarstr : IDENTIFICADOR STR ASIGNACION COMILLA IDENTIFICADOR COMILLAvarstrAux : IDENTIFICADOR STR ASIGNACION COMILLA IDENTIFICADOR COMILLAfuncion : FUN IDENTIFICADOR PAR_ABRE PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRAfuncionVarStr : FUN IDENTIFICADOR PAR_ABRE PAR_CIERRA LLAVE_ABRE varstr IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRAfuncionVarInt : varint FUN IDENTIFICADOR PAR_ABRE IDENTIFICADOR INT PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRAciclo_for : FOR PAR_ABRE varint PUNTOCOMA IDENTIFICADOR OP_RELACIONAL NUMERO PUNTOCOMA IDENTIFICADOR INCREMENTO PAR_CIERRA LLAVE_ABRE LLAVE_CIERRAciclo_forImprimir : FOR PAR_ABRE varint PUNTOCOMA IDENTIFICADOR OP_RELACIONAL NUMERO PUNTOCOMA IDENTIFICADOR INCREMENTO PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRAif : IF PAR_ABRE PAR_CIERRA LLAVE_ABRE LLAVE_CIERRA ELSE LLAVE_ABRE LLAVE_CIERRAifelseImprimir : varstr varstrAux IF PAR_ABRE IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA ELSE LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRAifelseImprimirInt : varint varintAux IF PAR_ABRE IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA ELSE LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA'
     
-_lr_action_items = {'IDENTIFICADOR':([0,9,13,14,21,24,25,28,38,41,],[6,15,18,20,29,32,20,36,46,49,]),'FOR':([0,],[7,]),'IF':([0,],[8,]),'FUN':([0,],[9,]),'$end':([1,2,3,4,5,22,23,40,50,56,61,62,],[0,-1,-2,-3,-4,-5,-8,-9,-11,-13,-10,-12,]),'INT':([6,18,],[11,26,]),'STR':([6,],[12,]),'PAR_ABRE':([7,8,15,],[13,14,21,]),'ASIGNACION':([10,11,12,26,],[16,-6,-7,34,]),'NUMERO':([16,28,34,],[23,37,42,]),'COMILLA':([16,29,32,46,],[24,38,40,51,]),'SEMICOLON':([17,33,36,37,42,],[25,41,-16,-15,-14,]),'PAR_CIERRA':([19,21,29,30,31,36,37,48,51,54,],[27,-23,-20,39,-22,-16,-15,53,-21,-17,]),'OP_RELACIONAL':([20,],[28,]),'LLAVE_ABRE':([27,39,53,55,],[35,47,57,58,]),'CONTENIDO':([35,47,57,58,],[44,44,44,44,]),'LLAVE_CIERRA':([35,43,44,45,47,52,57,58,59,60,],[-23,50,-18,-19,-23,56,-23,-23,61,62,]),'INCREMENTO':([49,],[54,]),'ELSE':([50,],[55,]),}
+_lr_action_items = {'IDENTIFICADOR':([0,2,3,13,16,24,37,39,40,42,43,45,51,53,57,58,60,77,78,79,87,100,101,111,127,128,],[12,17,20,23,26,35,47,49,50,-11,52,54,59,61,67,68,-13,84,85,86,93,105,106,114,129,130,]),'FUN':([0,2,42,],[13,16,-11,]),'FOR':([0,],[14,]),'IF':([0,18,19,48,69,],[15,28,29,-12,-14,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,42,60,80,97,102,104,107,120,135,136,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-13,-20,-16,-15,-17,-18,-19,-22,-21,]),'INT':([12,17,35,47,],[21,27,21,56,]),'STR':([12,20,61,],[22,30,22,]),'PAR_ABRE':([14,15,23,26,28,29,62,71,81,88,89,108,123,124,],[24,25,33,37,39,40,70,78,87,94,95,111,125,126,]),'ASIGNACION':([21,22,27,30,],[31,32,38,41,]),'PAR_CIERRA':([25,33,56,67,68,85,90,92,93,109,110,114,131,132,],[36,44,66,75,76,91,96,98,99,112,113,117,133,134,]),'NUMERO':([31,38,64,],[42,48,72,]),'COMILLA':([32,41,52,59,70,84,94,95,105,106,125,126,129,130,],[43,51,60,69,77,90,100,101,109,110,127,128,131,132,]),'PUNTOCOMA':([34,42,72,],[45,-11,79,]),'LLAVE_ABRE':([36,44,65,66,75,76,98,118,119,],[46,53,73,74,82,83,103,121,122,]),'LLAVE_CIERRA':([46,73,91,96,99,103,112,113,117,133,134,],[55,80,97,102,104,107,115,116,120,135,136,]),'OP_RELACIONAL':([49,50,54,],[57,58,64,]),'IMPRIMIR':([53,60,63,74,82,83,103,121,122,],[62,-13,71,81,88,89,108,123,124,]),'ELSE':([55,115,116,],[65,118,119,]),'INCREMENTO':([86,],[92,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'AR':([0,],[1,]),'XC':([0,],[2,]),'ciclo_for':([0,],[3,]),'condicional_if':([0,],[4,]),'funcion':([0,],[5,]),'tipo':([6,],[10,]),'inicializacion':([13,],[17,]),'condicion':([14,25,],[19,33,]),'expresion':([16,],[22,]),'parametros':([21,],[30,]),'vacio':([21,35,47,57,58,],[31,45,45,45,45,]),'bloque_codigo':([35,47,57,58,],[43,52,59,60,]),'incremento':([41,],[48,]),}
+_lr_goto_items = {'AR':([0,],[1,]),'varint':([0,24,],[2,34,]),'varstr':([0,53,],[3,63,]),'funcion':([0,],[4,]),'funcionVarStr':([0,],[5,]),'funcionVarInt':([0,],[6,]),'ciclo_for':([0,],[7,]),'ciclo_forImprimir':([0,],[8,]),'ifelseImprimir':([0,],[9,]),'ifelseImprimirInt':([0,],[10,]),'if':([0,],[11,]),'varintAux':([2,],[18,]),'varstrAux':([3,],[19,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,27 +27,26 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> AR","S'",1,None,None,None),
-  ('AR -> XC','AR',1,'p_AR','progSintactico.py',71),
-  ('AR -> ciclo_for','AR',1,'p_AR','progSintactico.py',72),
-  ('AR -> condicional_if','AR',1,'p_AR','progSintactico.py',73),
+  ('AR -> varint','AR',1,'p_AR','progSintactico.py',72),
+  ('AR -> varstr','AR',1,'p_AR','progSintactico.py',73),
   ('AR -> funcion','AR',1,'p_AR','progSintactico.py',74),
-  ('XC -> IDENTIFICADOR tipo ASIGNACION expresion','XC',4,'p_XC','progSintactico.py',77),
-  ('tipo -> INT','tipo',1,'p_tipo','progSintactico.py',80),
-  ('tipo -> STR','tipo',1,'p_tipo','progSintactico.py',81),
-  ('expresion -> NUMERO','expresion',1,'p_expresion','progSintactico.py',84),
-  ('expresion -> COMILLA IDENTIFICADOR COMILLA','expresion',3,'p_expresion','progSintactico.py',85),
-  ('ciclo_for -> FOR PAR_ABRE inicializacion SEMICOLON condicion SEMICOLON incremento PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA','ciclo_for',11,'p_ciclo_for','progSintactico.py',88),
-  ('condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA','condicional_if',7,'p_condicional_if','progSintactico.py',91),
-  ('condicional_if -> IF PAR_ABRE condicion PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA ELSE LLAVE_ABRE bloque_codigo LLAVE_CIERRA','condicional_if',11,'p_condicional_if','progSintactico.py',92),
-  ('funcion -> FUN IDENTIFICADOR PAR_ABRE parametros PAR_CIERRA LLAVE_ABRE bloque_codigo LLAVE_CIERRA','funcion',8,'p_funcion','progSintactico.py',95),
-  ('inicializacion -> IDENTIFICADOR INT ASIGNACION NUMERO','inicializacion',4,'p_inicializacion','progSintactico.py',99),
-  ('condicion -> IDENTIFICADOR OP_RELACIONAL NUMERO','condicion',3,'p_condicion','progSintactico.py',102),
-  ('condicion -> IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR','condicion',3,'p_condicion','progSintactico.py',103),
-  ('incremento -> IDENTIFICADOR INCREMENTO','incremento',2,'p_incremento','progSintactico.py',106),
-  ('bloque_codigo -> CONTENIDO','bloque_codigo',1,'p_bloque_codigo','progSintactico.py',109),
-  ('bloque_codigo -> vacio','bloque_codigo',1,'p_bloque_codigo','progSintactico.py',110),
-  ('parametros -> IDENTIFICADOR','parametros',1,'p_parametros','progSintactico.py',113),
-  ('parametros -> IDENTIFICADOR COMILLA IDENTIFICADOR COMILLA','parametros',4,'p_parametros','progSintactico.py',114),
-  ('parametros -> vacio','parametros',1,'p_parametros','progSintactico.py',115),
-  ('vacio -> <empty>','vacio',0,'p_vacio','progSintactico.py',118),
+  ('AR -> funcionVarStr','AR',1,'p_AR','progSintactico.py',75),
+  ('AR -> funcionVarInt','AR',1,'p_AR','progSintactico.py',76),
+  ('AR -> ciclo_for','AR',1,'p_AR','progSintactico.py',77),
+  ('AR -> ciclo_forImprimir','AR',1,'p_AR','progSintactico.py',78),
+  ('AR -> ifelseImprimir','AR',1,'p_AR','progSintactico.py',79),
+  ('AR -> ifelseImprimirInt','AR',1,'p_AR','progSintactico.py',80),
+  ('AR -> if','AR',1,'p_AR','progSintactico.py',81),
+  ('varint -> IDENTIFICADOR INT ASIGNACION NUMERO','varint',4,'p_varint','progSintactico.py',89),
+  ('varintAux -> IDENTIFICADOR INT ASIGNACION NUMERO','varintAux',4,'p_varintAux','progSintactico.py',104),
+  ('varstr -> IDENTIFICADOR STR ASIGNACION COMILLA IDENTIFICADOR COMILLA','varstr',6,'p_varstr','progSintactico.py',120),
+  ('varstrAux -> IDENTIFICADOR STR ASIGNACION COMILLA IDENTIFICADOR COMILLA','varstrAux',6,'p_varstrAux','progSintactico.py',135),
+  ('funcion -> FUN IDENTIFICADOR PAR_ABRE PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA','funcion',12,'p_funcion','progSintactico.py',153),
+  ('funcionVarStr -> FUN IDENTIFICADOR PAR_ABRE PAR_CIERRA LLAVE_ABRE varstr IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRA','funcionVarStr',11,'p_funcionVarStr','progSintactico.py',157),
+  ('funcionVarInt -> varint FUN IDENTIFICADOR PAR_ABRE IDENTIFICADOR INT PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRA','funcionVarInt',13,'p_funcionVarInt','progSintactico.py',167),
+  ('ciclo_for -> FOR PAR_ABRE varint PUNTOCOMA IDENTIFICADOR OP_RELACIONAL NUMERO PUNTOCOMA IDENTIFICADOR INCREMENTO PAR_CIERRA LLAVE_ABRE LLAVE_CIERRA','ciclo_for',13,'p_ciclo_for','progSintactico.py',179),
+  ('ciclo_forImprimir -> FOR PAR_ABRE varint PUNTOCOMA IDENTIFICADOR OP_RELACIONAL NUMERO PUNTOCOMA IDENTIFICADOR INCREMENTO PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE IDENTIFICADOR PAR_CIERRA LLAVE_CIERRA','ciclo_forImprimir',17,'p_ciclo_forImprimir','progSintactico.py',182),
+  ('if -> IF PAR_ABRE PAR_CIERRA LLAVE_ABRE LLAVE_CIERRA ELSE LLAVE_ABRE LLAVE_CIERRA','if',8,'p_if','progSintactico.py',219),
+  ('ifelseImprimir -> varstr varstrAux IF PAR_ABRE IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA ELSE LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA','ifelseImprimir',25,'p_ifelseImprimir','progSintactico.py',223),
+  ('ifelseImprimirInt -> varint varintAux IF PAR_ABRE IDENTIFICADOR OP_RELACIONAL IDENTIFICADOR PAR_CIERRA LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA ELSE LLAVE_ABRE IMPRIMIR PAR_ABRE COMILLA IDENTIFICADOR COMILLA PAR_CIERRA LLAVE_CIERRA','ifelseImprimirInt',25,'p_ifelseImprimirInt','progSintactico.py',248),
 ]
